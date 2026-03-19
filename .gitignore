@@ -3,3 +3,6 @@ node_modules
 script/data/*.json
 script/data/*.xlsx
 script/*.json
+script/**/*
+/script
+.env

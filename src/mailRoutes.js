@@ -1,5 +1,5 @@
 import express from "express";
-import { sendUserCredentialsMail } from "./mail.js";
+import handler, { sendUserCredentialsMail } from "./mail.js";
 
 const router = express.Router();
 
@@ -60,5 +60,7 @@ router.post("/send-credentials", async (req, res) => {
         });
     }
 });
+
+router.post("/reminder", handler)
 
 export default router;

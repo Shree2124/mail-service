@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { processBulkEmails } from "./utils/bulkEmailProcess.js";
 
 export const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -86,3 +87,21 @@ export const sendUserCredentialsMail = async ({
     html: htmlContent,
   });
 };
+
+export default async function handler(req, res) {
+  try {
+    const data = req.body;
+
+    const result = await processBulkEmails(data);
+
+    return res.status(200).json({
+      message: "AcadFlow notifications processed",
+      result,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message,
+    });
+  }
+}
+
